@@ -21,7 +21,6 @@ const App = () => {
         <Display>{state.display}</Display>
         <img src={logo} className="App-logo" alt="logo" />
         <Button value="C" onClick={handleClear} />
-        <br />
         <Button value={7} onClick={handleNumber} />
         <Button value={8} onClick={handleNumber} />
         <Button value={9} onClick={handleNumber} />
