@@ -1,5 +1,5 @@
 import { calcReducer, initialState } from '../calcReducer'
-import { NUMBER, SYMBOL, EQUALS, DECIMAL } from '../consts'
+import { DECIMAL, EQUALS, NUMBER, SYMBOL } from '../consts'
 
 describe('calculator reducer', () => {
   let state = calcReducer(initialState, {})
@@ -36,26 +36,26 @@ describe('calculator reducer', () => {
   })
 
   describe('number input', () => {
-  function sum(n1, n2, symbol, answer) {
-    state = calcReducer(initialState, {})
-    dispatch({ type: NUMBER, number: n1 })
-    dispatch({ type: SYMBOL, symbol })
-    expect(state).toEqual({
-      display: '0',
-      lastSymbol: symbol,
-      register: n1,
-    })
+    function sum(n1, n2, symbol, answer) {
+      state = calcReducer(initialState, {})
+      dispatch({ type: NUMBER, number: n1 })
+      dispatch({ type: SYMBOL, symbol })
+      expect(state).toEqual({
+        display: '0',
+        lastSymbol: symbol,
+        register: n1,
+      })
 
-    dispatch({ type: NUMBER, number: n2 })
-    expect(state.display).toBe(String(n2))
+      dispatch({ type: NUMBER, number: n2 })
+      expect(state.display).toBe(String(n2))
 
-    dispatch({ type: EQUALS })
-    expect(state.display).toBe(String(answer))
-  }
+      dispatch({ type: EQUALS })
+      expect(state.display).toBe(String(answer))
+    }
 
-  it('should sum two numberes', () => sum(1, 1, '+', 2))
-  it('should minuses one number from another', () => sum(6, 2, '-', 4))
-  it('should divide one number from another', () => sum(8, 2, '/', 4))
-  it('should multiply two numbers', () => sum(9, 9, 'X', 81))
-})
+    it('should sum two numberes', () => sum(1, 1, '+', 2))
+    it('should minuses one number from another', () => sum(6, 2, '-', 4))
+    it('should divide one number from another', () => sum(8, 2, '/', 4))
+    it('should multiply two numbers', () => sum(9, 9, 'X', 81))
+  })
 })

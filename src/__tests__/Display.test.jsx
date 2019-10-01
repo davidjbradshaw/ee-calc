@@ -1,15 +1,17 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
 
 import Display from '../Display'
 
-it('Renders the display', () => {
-  const value = 123
-  const display = <Display>{value}</Display>
+describe('Calculator display', () => {
+  it('should display the passed in number', () => {
+    const value = '123.45'
+    const display = <Display>{value}</Display>
 
-  expect(display).toMatchSnapshot()
+    expect(display).toMatchSnapshot()
 
-  const component = shallow(display)
+    const component = shallow(display)
 
-  expect(component.text()).toBe(value.toString())
+    expect(component.text()).toBe(value.toString())
+  })
 })
