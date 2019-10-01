@@ -1,9 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { eeBlue } from './consts'
 
-const displayStyle={
+const displayStyle = {
   border: `solid 5px ${eeBlue}`,
   color: eeBlue,
   backgroundColor: 'white',
@@ -15,15 +15,10 @@ const displayStyle={
   overflow: 'hidden',
 }
 
-const Display = ({children}) => (
-  <div style={displayStyle}>{ children }</div>
-)
+const Display = ({ children }) => <div style={displayStyle}>{children}</div>
 
-Display.prototypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
+Display.propTypes = {
+  children: PropTypes.string.isRequired,
 }
 
 export default Display

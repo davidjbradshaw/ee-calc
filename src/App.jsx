@@ -1,11 +1,12 @@
+import './App.css'
+
 import React from 'react'
 
-import { CLEAR, NUMBER, SYMBOL, EQUALS, DECIMAL } from './consts'
-import Display from './Display'
 import Button from './Button'
+import Display from './Display'
 import useCalcReducer from './calcReducer'
+import { CLEAR, DECIMAL, EQUALS, NUMBER, SYMBOL } from './consts'
 import logo from './logo.svg'
-import './App.css'
 
 const App = () => {
   const [state, dispatch] = useCalcReducer()
