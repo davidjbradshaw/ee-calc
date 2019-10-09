@@ -1,16 +1,15 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { eeBlue } from './consts'
-
 const displayStyle = {
-  border: `solid 5px ${eeBlue}`,
-  color: eeBlue,
-  backgroundColor: 'white',
-  borderRadius: '5px',
+  color: '#777',
+  backgroundColor: '#dbe7ba',
+  border: 'solid 1px #ccc',
+  borderRadius: '3px',
   fontSize: '24px',
   fontFamily: "'Orbitron', sans-serif",
-  padding: `5px 10px 5px`,
+  padding: `8px 10px 3px`,
+  margin: '5px',
   textAlign: 'right',
   overflow: 'hidden',
 }
