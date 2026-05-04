@@ -1,12 +1,12 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import './Button.css'
 
-const Button = memo(({value, onClick}) => (
+const Button = ({value, onClick}) => (
   <button type="button" value={value} onClick={() => onClick(value)}>
     {value}
   </button>
-))
+)
 
 Button.propTypes = {
   value: PropTypes.oneOfType([

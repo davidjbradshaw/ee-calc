@@ -3,6 +3,7 @@ import React from 'react'
 import Display from './Display'
 import Button from './Button'
 import Logo from './Logo'
+import { CLEAR, DECIMAL } from './consts'
 import useCalcReducer from './useCalcReducer'
 import useKeyboard from './useKeyboard'
 import useHandlers from './useHandlers'
@@ -12,8 +13,7 @@ const App = () => {
   const [state, dispatch] = useCalcReducer()
 
   const {
-    handleClear,
-    handleDecimal,
+    handleButton,
     handleNumber,
     handleSymbol,
   } = useHandlers(dispatch)
@@ -24,7 +24,7 @@ const App = () => {
     <div className="calc">
       <Display>{state.display}</Display>
       <Logo />
-      <Button value="C" onClick={handleClear} />
+      <Button value={CLEAR} onClick={handleButton} />
       <Button value={7} onClick={handleNumber} />
       <Button value={8} onClick={handleNumber} />
       <Button value={9} onClick={handleNumber} />
@@ -38,7 +38,7 @@ const App = () => {
       <Button value={3} onClick={handleNumber} />
       <Button value="+" onClick={handleSymbol} />
       <Button value={0} onClick={handleNumber} />
-      <Button value="." onClick={handleDecimal} />
+      <Button value={DECIMAL} onClick={handleButton} />
       <Button value="=" onClick={handleSymbol} />
       <Button value="-" onClick={handleSymbol} />
     </div>
