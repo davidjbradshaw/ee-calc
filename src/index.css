@@ -1,5 +1,9 @@
 @import '~@fontsource/dseg7-classic';
 
+:root {
+  --eeBlue: #1795d4;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

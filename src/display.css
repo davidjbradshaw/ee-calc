@@ -1,0 +1,13 @@
+.calc .display {
+  border: solid 5px var(--eeBlue);
+  color: black;
+  background-color: #B7C98A;
+  border-radius: 10px;
+  font-family: "DSEG7 Classic", monospace;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 5px 10px 5px;
+  text-align: right;
+  overflow: hidden;
+}
