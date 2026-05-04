@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className="calc">
       <Display>{state.display}</Display>
-      <img src={logo} className="App-logo" alt="logo" />
+      <img src={logo} className="logo" alt="Equal Experts" />
       <Button value="C" onClick={handleClear} />
       <Button value={7} onClick={handleNumber} />
       <Button value={8} onClick={handleNumber} />
