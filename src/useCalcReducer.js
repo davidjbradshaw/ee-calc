@@ -1,4 +1,4 @@
-import { memo, useReducer } from 'react'
+import { useReducer } from 'react'
 import { includes } from 'ramda'
 
 import {
@@ -12,6 +12,7 @@ import {
   MEMORY,
   MEMORY_CLEAR,
   MEMORY_RECALL,
+  PLUS_MINUS,
 } from './consts'
 
 export const hasDecimal = includes('.')
@@ -30,7 +31,7 @@ export const initialState = {
   fresh: true,
   register: 0,
   memory: 0,
-};
+}
 
 function sum({register, display, lastSymbol}) {
   const floatDisplay = Number(display)
@@ -55,19 +56,29 @@ function sum({register, display, lastSymbol}) {
 
 export function calcReducer(state = initialState, action) {
   switch (action.type) {
+    case ALL_CLEAR:
+      return {
+        ...initialState,
+        memory: state.memory,
+      }
+
     case CLEAR:
       return {
         ...state,
         display: ZERO,
         fresh: true,
       }
-    
-    case ALL_CLEAR:
+
+    case DECIMAL:
       return {
-        ...initialState,
-        memory: state.memory,
+        ...state,
+        fresh: false,
+        display:
+          !hasDecimal(state.display) && canAppendDigit(state.display)
+            ? `${state.display}.`
+            : state.display,
       }
-    
+
     case MEMORY:
       return {
         ...state,
@@ -79,7 +90,7 @@ export function calcReducer(state = initialState, action) {
         ...state,
         memory: 0,
       }
-    
+
     case MEMORY_RECALL:
       return {
         ...state,
@@ -97,31 +108,30 @@ export function calcReducer(state = initialState, action) {
             : canAppendDigit(state.display)
               ? `${state.display}${action.number}`
               : state.display,
-      };
-
-    case DECIMAL:
+      }
+    
+    case PLUS_MINUS:
       return {
         ...state,
-        fresh: false,
         display:
-          !hasDecimal(state.display) && canAppendDigit(state.display)
-            ? `${state.display}.`
-            : state.display,
-      };
+          state.display === ZERO
+            ? ZERO
+            : String(Number(state.display) * -1),
+      }
 
     case SYMBOL: {
-      const summed = sum(state);
+      const summed = sum(state)
       return {
         ...state,
         lastSymbol: action.symbol,
         fresh: true,
         register: summed,
         display: String(summed),
-      };
+      }
     }
 
     default:
-      return state;
+      return state
   }
 }
 
