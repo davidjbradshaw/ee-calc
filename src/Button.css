@@ -1,4 +1,4 @@
-.calc button{
+.calc button {
   background-color: white;
   color: var(--eeBlue);
   border-radius: 5px;
@@ -8,4 +8,23 @@
   margin: 0 0 5px 5px;
   text-align: center;
   font-size: 20px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.calc button:hover {
+  background-color: #f0f0f0;
+  border-color: var(--eeBlue);
+  transform: scale(1.05);
+}
+
+.calc button:active {
+  background-color: var(--eeBlue);
+  color: white;
+  transform: scale(0.98);
+}
+
+.calc button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(23, 149, 212, 0.3);
 }

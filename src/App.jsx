@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import { CLEAR, NUMBER, SYMBOL, DECIMAL } from './consts'
 import Display from './Display'
@@ -11,10 +11,10 @@ import './App.css'
 const App = () => {
   const [state, dispatch] = useCalcReducer()
 
-  const handleClear = () => dispatch({ type: CLEAR })
-  const handleDecimal = () => dispatch({ type: DECIMAL })
-  const handleNumber = number => dispatch({ type: NUMBER, number })
-  const handleSymbol = symbol => dispatch({ type: SYMBOL, symbol })
+  const handleClear = useCallback(() => dispatch({ type: CLEAR }), [dispatch])
+  const handleDecimal = useCallback(() => dispatch({ type: DECIMAL }), [dispatch])
+  const handleNumber = useCallback(number => dispatch({ type: NUMBER, number }), [dispatch])
+  const handleSymbol = useCallback(symbol => dispatch({ type: SYMBOL, symbol }), [dispatch])
 
   useKeyboard(dispatch);
 

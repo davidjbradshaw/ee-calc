@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { hasDecimal, isScreenFull } from './calcReducer'
 import { SCREEN_MAX } from './consts'
@@ -34,9 +34,9 @@ export function formatDisplayValue(value) {
   return formattedValue
 }
 
-const Display = ({children}) => (
+const Display = memo(({children}) => (
   <div className="display">{ formatDisplayValue(children) }</div>
-)
+))
 
 Display.propTypes = {
   value: PropTypes.oneOfType([
