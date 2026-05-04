@@ -1,21 +1,24 @@
 import { useCallback } from 'react'
 import { CLEAR, NUMBER, SYMBOL, DECIMAL } from './consts'
 
-const useHandlers = (dispatch) => {
-  const handleClear = useCallback(() => dispatch({ type: CLEAR }), [dispatch])
+export default (dispatch) => ({
+  handleClear: useCallback(
+    () => dispatch({ type: CLEAR }),
+    [dispatch],
+  ),
+    
+  handleDecimal: useCallback(
+    () => dispatch({ type: DECIMAL }),
+    [dispatch],
+  ),
   
-  const handleDecimal = useCallback(() => dispatch({ type: DECIMAL }), [dispatch])
+  handleNumber: useCallback(
+    (number) => dispatch({ type: NUMBER, number }),
+    [dispatch],
+  ),
 
-  const handleNumber = useCallback(number => dispatch({ type: NUMBER, number }), [dispatch])
-
-  const handleSymbol = useCallback(symbol => dispatch({ type: SYMBOL, symbol }), [dispatch])
-
-  return {
-    handleClear,
-    handleDecimal,
-    handleNumber,
-    handleSymbol
-  }
-}
-
-export default useHandlers
+  handleSymbol: useCallback(
+    (symbol) => dispatch({ type: SYMBOL, symbol }),
+    [dispatch],
+  ),
+})
