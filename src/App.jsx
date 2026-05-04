@@ -23,8 +23,6 @@ const App = () => {
 
   useKeyboard(dispatch);
 
-
-
   return (
     <div className="calc">
       <Display>{state.display}</Display>
