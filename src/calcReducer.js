@@ -1,15 +1,16 @@
 import { useReducer } from 'react'
 import { includes } from 'ramda'
 
-import { CLEAR, NUMBER, SYMBOL, EQUALS, DECIMAL } from './consts'
+import { CLEAR, NUMBER, SYMBOL, DECIMAL } from './consts'
 
 const hasDecimal = includes('.')
 
 export const initialState = {
-  register: 0,
+  display: "0",
   lastSymbol: null,
-  display: '0', 
-}
+  new: true,
+  register: 0,
+};
 
 function sum({register, display, lastSymbol}) {
   const floatDisplay = Number(display)
@@ -33,14 +34,16 @@ function sum({register, display, lastSymbol}) {
 }
 
 export function calcReducer(state = initialState, action) {
-  switch (action.type) {
-    case CLEAR:
-      return initialState
+  if (action.type === CLEAR) return initialState
 
+  const type = state.display.length < 15 ? action.type : 'FULL'
+
+  switch (type) {
     case NUMBER:
       return {
         ...state,
-        display: state.display === '0'
+        new: false,
+        display: state.new || state.display === '0'
           ? String(action.number)
           : `${state.display}${action.number}`
       }
@@ -48,27 +51,24 @@ export function calcReducer(state = initialState, action) {
     case DECIMAL:
       return {
         ...state,
-        display: hasDecimal(state.display)
+        new: false,
+        display: state.new
+          ? '0.'
+          : hasDecimal(state.display)
           ? state.display
           : `${state.display}.`
       }
 
-    case SYMBOL:
+    case SYMBOL: {
+      const value = sum(state)
       return {
         ...state,
         lastSymbol: action.symbol,
-        register: sum(state),
-        display: '0',
+        new: true,
+        register: value,
+        display: String(value),
       }
-
-      case EQUALS:
-        const value = String(sum(state))
-        return {
-          ...state,
-          lastSymbol: '=',
-          register: value,
-          display: value,
-        }
+    }
     
     default:
       return state
