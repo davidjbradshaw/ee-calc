@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { hasDecimal, isScreenFull } from './calcReducer'
+import { hasDecimal, isScreenFull } from './useCalcReducer'
 import { SCREEN_MAX } from './consts'
 
 import './Display.css'
