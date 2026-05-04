@@ -13,8 +13,8 @@
     "react-test-renderer": "^16.9.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "jest-enzyme": "^7.1.1"
   }
 }
