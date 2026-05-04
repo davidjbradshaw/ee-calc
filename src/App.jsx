@@ -9,8 +9,8 @@ import useKeyboard from './useKeyboard'
 import useHandlers from './useHandlers'
 import './App.css'
 
-  const clearDisplay = (state) =>
-    state.display === ZERO || state.fresh ? ALL_CLEAR : CLEAR;
+const clearDisplay = (state) =>
+  state.display === ZERO || state.fresh ? ALL_CLEAR : CLEAR;
 
 const App = () => {
   const [state, dispatch] = useCalcReducer()
