@@ -3,7 +3,7 @@ import React from 'react'
 import Display from './Display'
 import Button from './Button'
 import Logo from './Logo'
-import { CLEAR, DECIMAL } from './consts'
+import { ALL_CLEAR, CLEAR, DECIMAL, ZERO } from './consts'
 import useCalcReducer from './useCalcReducer'
 import useKeyboard from './useKeyboard'
 import useHandlers from './useHandlers'
@@ -20,11 +20,15 @@ const App = () => {
 
   useKeyboard(dispatch);
 
+  const clearDisplay = state.display === ZERO || state.fresh
+    ? ALL_CLEAR
+    : CLEAR
+
   return (
     <div className="calc">
       <Display>{state.display}</Display>
       <Logo />
-      <Button value={CLEAR} onClick={handleButton} />
+      <Button value={clearDisplay} onClick={handleButton} />
       <Button value={7} onClick={handleNumber} />
       <Button value={8} onClick={handleNumber} />
       <Button value={9} onClick={handleNumber} />

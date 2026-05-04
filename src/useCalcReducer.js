@@ -1,7 +1,15 @@
 import { useReducer } from 'react'
 import { includes } from 'ramda'
 
-import { CLEAR, NUMBER, SYMBOL, DECIMAL, SCREEN_MAX, ZERO } from './consts'
+import {
+  ALL_CLEAR,
+  CLEAR,
+  NUMBER,
+  SYMBOL,
+  DECIMAL,
+  SCREEN_MAX,
+  ZERO,
+} from './consts'
 
 export const hasDecimal = includes('.')
 export const isScreenFull = (display) =>
@@ -16,7 +24,7 @@ const canAppendDigit = (display) =>
 export const initialState = {
   display: ZERO,
   lastSymbol: null,
-  new: true,
+  fresh: true,
   register: 0,
 };
 
@@ -44,24 +52,31 @@ function sum({register, display, lastSymbol}) {
 export function calcReducer(state = initialState, action) {
   switch (action.type) {
     case CLEAR:
-      return initialState
+      return {
+        ...state,
+        display: ZERO,
+        fresh: true,
+      }
     
+    case ALL_CLEAR:
+      return initialState
+
     case NUMBER:
       return {
         ...state,
-        new: false,
+        fresh: false,
         display:
-          state.new || state.display === ZERO
+          state.fresh || state.display === ZERO
             ? String(action.number)
             : canAppendDigit(state.display)
               ? `${state.display}${action.number}`
               : state.display,
       };
-    
+
     case DECIMAL:
       return {
         ...state,
-        new: false,
+        fresh: false,
         display:
           !hasDecimal(state.display) && canAppendDigit(state.display)
             ? `${state.display}.`
@@ -69,18 +84,18 @@ export function calcReducer(state = initialState, action) {
       };
 
     case SYMBOL: {
-      const summed = sum(state)
+      const summed = sum(state);
       return {
         ...state,
         lastSymbol: action.symbol,
-        new: true,
+        fresh: true,
         register: summed,
         display: String(summed),
-      }
+      };
     }
-    
+
     default:
-      return state
+      return state;
   }
 }
 
