@@ -62,7 +62,8 @@ export function calcReducer(state = initialState, action) {
       return {
         ...state,
         new: false,
-        display: hasDecimal(state.display) || isScreenFull(`${state.display}.`)
+        display:
+          hasDecimal(state.display) || wouldExceedScreen(state.display)
             ? state.display
             : `${state.display}.`,
       };
