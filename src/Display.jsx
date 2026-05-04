@@ -22,13 +22,13 @@ export function formatDisplayValue(value) {
   let precision = Math.max(0, maxLength - 4)
   let formattedValue = numericValue
     .toExponential(precision)
-    .replace('e+', ' e')
+    .replace('e', ' e')
 
   while (formattedValue.length > maxLength && precision > 0) {
     precision -= 1
     formattedValue = numericValue
       .toExponential(precision)
-      .replace('e+', ' e')
+      .replace('e', ' e')
   }
 
   return formattedValue
