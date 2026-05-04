@@ -10,13 +10,14 @@ import './App.css'
 
 const App = () => {
   const [state, dispatch] = useCalcReducer()
+
   const handleClear = () => dispatch({ type: CLEAR })
   const handleDecimal = () => dispatch({ type: DECIMAL })
   const handleNumber = number => dispatch({ type: NUMBER, number })
   const handleSymbol = symbol => dispatch({ type: SYMBOL, symbol })
 
   useKeyboard(dispatch);
-  
+
   return (
     <div className="calc">
       <Display>{state.display}</Display>
