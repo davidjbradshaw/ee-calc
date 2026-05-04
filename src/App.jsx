@@ -9,6 +9,9 @@ import useKeyboard from './useKeyboard'
 import useHandlers from './useHandlers'
 import './App.css'
 
+  const clearDisplay = (state) =>
+    state.display === ZERO || state.fresh ? ALL_CLEAR : CLEAR;
+
 const App = () => {
   const [state, dispatch] = useCalcReducer()
 
@@ -20,15 +23,13 @@ const App = () => {
 
   useKeyboard(dispatch);
 
-  const clearDisplay = state.display === ZERO || state.fresh
-    ? ALL_CLEAR
-    : CLEAR
+
 
   return (
     <div className="calc">
       <Display>{state.display}</Display>
       <Logo />
-      <Button value={clearDisplay} onClick={handleButton} />
+      <Button value={clearDisplay(state)} onClick={handleButton} />
       <Button value={7} onClick={handleNumber} />
       <Button value={8} onClick={handleNumber} />
       <Button value={9} onClick={handleNumber} />
