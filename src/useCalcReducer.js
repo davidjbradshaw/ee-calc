@@ -10,8 +10,8 @@ export const isScreenFull = (display) =>
     : SCREEN_MAX
   )
 
-const wouldExceedScreen = (display) =>
-  isScreenFull(`${display}${ZERO}`)
+const canAppendDigit = (display) =>
+  !isScreenFull(`${display}${ZERO}`)
 
 export const initialState = {
   display: ZERO,
@@ -53,9 +53,9 @@ export function calcReducer(state = initialState, action) {
         display:
           state.new || state.display === ZERO
             ? String(action.number)
-            : wouldExceedScreen(state.display)
-              ? state.display
-              : `${state.display}${action.number}`,
+            : canAppendDigit(state.display)
+              ? `${state.display}${action.number}`
+              : state.display,
       };
     
     case DECIMAL:
@@ -63,9 +63,9 @@ export function calcReducer(state = initialState, action) {
         ...state,
         new: false,
         display:
-          hasDecimal(state.display) || wouldExceedScreen(state.display)
-            ? state.display
-            : `${state.display}.`,
+          !hasDecimal(state.display) && canAppendDigit(state.display)
+            ? `${state.display}.`
+            : state.display,
       };
 
     case SYMBOL: {
