@@ -1,7 +1,7 @@
 import { useReducer } from 'react'
 import { includes } from 'ramda'
 
-import { CLEAR, NUMBER, SYMBOL, DECIMAL, SCREEN_MAX, ZERO } from "./consts";
+import { CLEAR, NUMBER, SYMBOL, DECIMAL, SCREEN_MAX, ZERO } from './consts'
 
 const hasDecimal = includes('.')
 const isScreenFull = (display) => 
