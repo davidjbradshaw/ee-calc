@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { hasDecimal, isScreenFull } from './calcReducer'
 import { SCREEN_MAX } from './consts'
 
-import './display.css'
+import './Display.css'
 
 export function formatDisplayValue(value) {
   const rawValue = String(value)
