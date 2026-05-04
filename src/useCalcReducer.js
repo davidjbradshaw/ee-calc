@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { memo, useReducer } from 'react'
 import { includes } from 'ramda'
 
 import {
@@ -9,6 +9,9 @@ import {
   DECIMAL,
   SCREEN_MAX,
   ZERO,
+  MEMORY,
+  MEMORY_CLEAR,
+  MEMORY_RECALL,
 } from './consts'
 
 export const hasDecimal = includes('.')
@@ -26,6 +29,7 @@ export const initialState = {
   lastSymbol: null,
   fresh: true,
   register: 0,
+  memory: 0,
 };
 
 function sum({register, display, lastSymbol}) {
@@ -59,7 +63,29 @@ export function calcReducer(state = initialState, action) {
       }
     
     case ALL_CLEAR:
-      return initialState
+      return {
+        ...initialState,
+        memory: state.memory,
+      }
+    
+    case MEMORY:
+      return {
+        ...state,
+        memory: Number(state.display),
+      }
+
+    case MEMORY_CLEAR:
+      return {
+        ...state,
+        memory: 0,
+      }
+    
+    case MEMORY_RECALL:
+      return {
+        ...state,
+        display: String(state.memory),
+        fresh: false,
+      }
 
     case NUMBER:
       return {

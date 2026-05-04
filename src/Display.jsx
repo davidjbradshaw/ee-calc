@@ -39,7 +39,7 @@ const Display = memo(({children}) => (
 ))
 
 Display.propTypes = {
-  value: PropTypes.oneOfType([
+  children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
   ]).isRequired,
