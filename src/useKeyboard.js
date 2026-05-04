@@ -13,60 +13,48 @@ const isEditableElement = (target) =>
 export default function useKeyboard(dispatch) {
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.metaKey || event.ctrlKey || event.altKey) {
-        return
-      }
+      if (event.metaKey || event.ctrlKey || event.altKey) return
+      if (isEditableElement(event.target)) return;
 
-      const { key, target } = event
-
-      if (isEditableElement(target)) {
-        return
-      }
+      const { key } = event
 
       if (/^[0-9]$/.test(key)) {
-        event.preventDefault()
         dispatch({ type: NUMBER, number: Number(key) })
-        return
-      }
-
-      switch (key) {
+      } else switch (key) {
         case '.':
-          event.preventDefault()
           dispatch({ type: DECIMAL })
-          return
+          break
 
         case '+':
         case '-':
         case '/':
-          event.preventDefault()
           dispatch({ type: SYMBOL, symbol: key })
-          return
+          break
 
         case '*':
         case 'x':
         case 'X':
-          event.preventDefault()
           dispatch({ type: SYMBOL, symbol: 'X' })
-          return
+          break
 
         case '=':
         case 'Enter':
-          event.preventDefault()
           dispatch({ type: SYMBOL, symbol: '=' })
-          return
+          break
 
         case 'Backspace':
         case 'Delete':
         case 'Escape':
         case 'c':
         case 'C':
-          event.preventDefault()
           dispatch({ type: CLEAR })
-          return
+          break
 
         default:
           return
       }
+
+      event.preventDefault()
     }
 
     window.addEventListener('keydown', handleKeyDown)
