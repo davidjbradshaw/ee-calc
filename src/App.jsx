@@ -4,6 +4,7 @@ import { CLEAR, NUMBER, SYMBOL, DECIMAL } from './consts'
 import Display from './Display'
 import Button from './Button'
 import useCalcReducer from './calcReducer'
+import useKeyboard from './useKeyboard'
 import logo from './logo.svg'
 import './App.css'
 
@@ -14,6 +15,8 @@ const App = () => {
   const handleNumber = number => dispatch({ type: NUMBER, number })
   const handleSymbol = symbol => dispatch({ type: SYMBOL, symbol })
 
+  useKeyboard(dispatch);
+  
   return (
     <div className="calc">
       <Display>{state.display}</Display>
