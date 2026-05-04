@@ -14,7 +14,8 @@
 
 .calc {
   margin: 30px;
-  border-radius: 5px;
+  border: 2px solid #39b6f6;
+  border-radius: 10px;
   background-color: #1795d4;
   width: 186px;
 }
