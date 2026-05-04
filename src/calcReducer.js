@@ -3,9 +3,9 @@ import { includes } from 'ramda'
 
 import { CLEAR, NUMBER, SYMBOL, DECIMAL, SCREEN_MAX, ZERO } from './consts'
 
-const hasDecimal = includes('.')
-const isScreenFull = (display) => 
-  display.length >= (hasDecimal(display) ? SCREEN_MAX + 1 : SCREEN_MAX)
+export const hasDecimal = includes('.')
+export const isScreenFull = (display) =>
+  display.length > (hasDecimal(display) ? SCREEN_MAX + 1 : SCREEN_MAX)
 
 export const initialState = {
   display: ZERO,
@@ -47,7 +47,7 @@ export function calcReducer(state = initialState, action) {
         display:
           state.new || state.display === ZERO
             ? String(action.number)
-            : isScreenFull(state.display)
+            : isScreenFull(`${state.display}${action.number}`)
               ? state.display
               : `${state.display}${action.number}`,
       };
@@ -56,7 +56,7 @@ export function calcReducer(state = initialState, action) {
       return {
         ...state,
         new: false,
-        display: hasDecimal(state.display) || isScreenFull(state.display)
+        display: hasDecimal(state.display) || isScreenFull(`${state.display}.`)
             ? state.display
             : `${state.display}.`,
       };

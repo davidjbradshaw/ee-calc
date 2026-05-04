@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Display from '../Display'
+import Display, { formatDisplayValue } from '../Display'
 
 it('Renders the display', () => {
   const value = 123
@@ -12,4 +12,21 @@ it('Renders the display', () => {
   const component = shallow(display)
 
   expect(component.text()).toBe(value.toString())
+})
+
+it('renders long integers using exponent notation', () => {
+  const component = shallow(<Display>{123456789}</Display>)
+
+  expect(component.text()).toBe('1.23e8')
+})
+
+it('renders long decimals using exponent notation', () => {
+  const component = shallow(<Display>{12.3456789}</Display>)
+
+  expect(component.text()).toBe('1.23e1')
+})
+
+it('formats values only after they exceed the screen length rule', () => {
+  expect(formatDisplayValue('12345678')).toBe('12345678')
+  expect(formatDisplayValue('1234567.8')).toBe('1234567.8')
 })
