@@ -37,12 +37,12 @@ const App = () => {
       <Button value={2} onClick={handleNumber} />
       <Button value={3} onClick={handleNumber} />
       <Button value="+" onClick={handleSymbol} />
-      <Button value={0} onClick={handleNumber} />
       <Button value={DECIMAL} onClick={handleButton} />
+      <Button value={0} onClick={handleNumber} />
       <Button value="=" onClick={handleSymbol} />
       <Button value="-" onClick={handleSymbol} />
     </div>
-  )
+  );
 }
 
 export default App
