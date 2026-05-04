@@ -3,9 +3,9 @@ import React from 'react'
 import { CLEAR, NUMBER, SYMBOL, DECIMAL } from './consts'
 import Display from './Display'
 import Button from './Button'
+import Logo from './Logo'
 import useCalcReducer from './calcReducer'
 import useKeyboard from './useKeyboard'
-import logo from './logo.svg'
 import './App.css'
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
   return (
     <div className="calc">
       <Display>{state.display}</Display>
-      <img src={logo} className="logo" alt="Equal Experts" />
+      <Logo />
       <Button value="C" onClick={handleClear} />
       <Button value={7} onClick={handleNumber} />
       <Button value={8} onClick={handleNumber} />
