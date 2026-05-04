@@ -5,7 +5,13 @@ import { CLEAR, NUMBER, SYMBOL, DECIMAL, SCREEN_MAX, ZERO } from './consts'
 
 export const hasDecimal = includes('.')
 export const isScreenFull = (display) =>
-  display.length > (hasDecimal(display) ? SCREEN_MAX + 1 : SCREEN_MAX)
+  display.length > (hasDecimal(display)
+    ? SCREEN_MAX + 1
+    : SCREEN_MAX
+  )
+
+const wouldExceedScreen = (display) =>
+  isScreenFull(`${display}${ZERO}`)
 
 export const initialState = {
   display: ZERO,
@@ -47,7 +53,7 @@ export function calcReducer(state = initialState, action) {
         display:
           state.new || state.display === ZERO
             ? String(action.number)
-            : isScreenFull(`${state.display}${action.number}`)
+            : wouldExceedScreen(state.display)
               ? state.display
               : `${state.display}${action.number}`,
       };
