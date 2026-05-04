@@ -5,10 +5,13 @@ import { eeBlue } from './consts'
 
 const displayStyle={
   border: `solid 5px ${eeBlue}`,
-  color: eeBlue,
-  backgroundColor: 'white',
-  borderRadius: '5px',
-  fontSize: '20px',
+  color: 'black',
+  backgroundColor: '#B7C98A',
+  borderRadius: '10px',
+  fontFamily: '"VT323", monospace',
+  fontSize: '24px',
+  fontWeight: '500',
+  letterSpacing: '1px',
   padding: `5px 10px 5px`,
   textAlign: 'right',
   overflow: 'hidden',
