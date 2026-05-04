@@ -38,7 +38,7 @@ const Display = ({children}) => (
   <div className="display">{ formatDisplayValue(children) }</div>
 )
 
-Display.prototypes = {
+Display.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number

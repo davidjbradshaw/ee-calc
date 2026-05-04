@@ -8,7 +8,7 @@ const Button = ({value, onClick}) => (
   </button>
 )
 
-Button.prototypes = {
+Button.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
