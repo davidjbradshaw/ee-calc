@@ -10,24 +10,19 @@ export function formatDisplayValue(value) {
   if (!isScreenFull(value)) return value;
 
   const numericValue = Number(value)
+  const maxLength = SCREEN_MAX + 1;
 
-  if (!Number.isFinite(numericValue))  return value
+  if (!Number.isFinite(numericValue)) return value
 
-  const maxLength = SCREEN_MAX + 2
   let precision = SCREEN_MAX -4
-  let formattedValue = numericValue
-    .toExponential(precision)
-    .replace('e', ' e')
+  let formattedValue = numericValue.toExponential(precision)
 
   while (formattedValue.length > maxLength && precision > 0) {
-    console.log('formattedValue', formattedValue, 'precision', precision)
     precision -= 1
-    formattedValue = numericValue
-      .toExponential(precision)
-      .replace('e', ' e')
+    formattedValue = numericValue.toExponential(precision)  
   }
 
-  return formattedValue
+  return formattedValue.replace("e", " e");
 }
 
 const Display = memo(({children}) => (
