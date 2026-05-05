@@ -58,16 +58,6 @@ export function calcReducer(state, action) {
         fresh: true,
       }
 
-    case DECIMAL:
-      return {
-        ...state,
-        fresh: false,
-        display:
-          !hasDecimal(state.display) && canAppendDigit(state.display)
-            ? `${state.display}.`
-            : state.display,
-      }
-
     case MEMORY:
       return {
         ...state,
@@ -80,6 +70,7 @@ export function calcReducer(state, action) {
         display: String(state.memory),
         fresh: false,
       }
+
     case ZERO:
     case ONE:
     case TWO:
@@ -90,8 +81,8 @@ export function calcReducer(state, action) {
     case SEVEN:
     case EIGHT:
     case NINE: {
-      const digit = action.button
       const { display, fresh } = state
+      const digit = action.button
       return {
         ...state,
         fresh: false,
@@ -104,12 +95,17 @@ export function calcReducer(state, action) {
       }
     }
 
-    case PLUS_MINUS:
+    case DECIMAL: {
+      const { display } = state
       return {
         ...state,
+        fresh: false,
         display:
-          state.display === ZERO ? ZERO : String(Number(state.display) * -1),
+          !hasDecimal(display) && canAppendDigit(display)
+            ? `${display}.`
+            : display,
       }
+    }
 
     case DIVIDE:
     case MULTIPLY:
@@ -135,6 +131,12 @@ export function calcReducer(state, action) {
         fresh: true,
       }
     }
+
+    case PLUS_MINUS:
+      return {
+        ...state,
+        display: String(Number(state.display) * -1),
+      }
 
     default:
       return state
