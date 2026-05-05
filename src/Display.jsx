@@ -7,10 +7,10 @@ import './Display.css'
 
 export function formatDisplayValue(value) {
   if (value === 'NaN') return 'Error'
-  if (!isScreenFull(value)) return value;
+  if (!isScreenFull(value)) return value
 
   const numericValue = Number(value)
-  const maxLength = SCREEN_MAX + 1;
+  const maxLength = SCREEN_MAX + 1
 
   if (!Number.isFinite(numericValue)) return value
 
@@ -22,7 +22,7 @@ export function formatDisplayValue(value) {
     formattedValue = numericValue.toExponential(precision)  
   }
 
-  return formattedValue.replace("e", " e");
+  return formattedValue.replace("e", " e")
 }
 
 const Display = memo(({children}) => (
