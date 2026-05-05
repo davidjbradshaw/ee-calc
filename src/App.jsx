@@ -22,9 +22,10 @@ const handleButtonClick = (dispatch) => (button) =>
 
 const App = () => {
   const [state, dispatch] = useCalcReducer()
-  const clicked = handleButtonClick(dispatch)
+  const onClick = handleButtonClick(dispatch)
   const clearButton = clearDisplay(state)
-  useKeyboard(clicked, clearButton)
+
+  useKeyboard(onClick, clearButton)
 
   return (
     <div className="calc">
@@ -32,13 +33,14 @@ const App = () => {
       <Logo />
       {
         [clearButton, ...BUTTONS].map(
-        (button) => (
-          <Button
-            key={button}
-            value={button}
-            onClick={clicked}
-          />
-        ))
+          (button) => (
+            <Button
+              key={button}
+              value={button}
+              onClick={onClick}
+            />
+          )
+        )
       }
     </div>
   )
