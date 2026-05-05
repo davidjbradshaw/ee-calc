@@ -24,15 +24,6 @@ export const isScreenFull = (display) =>
 
 const canAppendDigit = (display) =>
   !isScreenFull(`${display}${ZERO}`)
-
-export const initialState = {
-  display: ZERO,
-  lastSymbol: null,
-  fresh: true,
-  register: 0,
-  memory: 0,
-}
-
 function sum({register, display, lastSymbol}) {
   const floatDisplay = Number(display)
 
@@ -52,6 +43,14 @@ function sum({register, display, lastSymbol}) {
     default:
       return floatDisplay
   }
+}
+
+export const initialState = {
+  display: ZERO,
+  lastSymbol: null,
+  fresh: true,
+  register: 0,
+  memory: 0,
 }
 
 export function calcReducer(state = initialState, action) {

@@ -19,46 +19,40 @@ import useHandlers from './useHandlers'
 import './App.css'
 
 const clearDisplay = (state) =>
-  state.display === ZERO || state.fresh ? ALL_CLEAR : CLEAR;
+  state.display === ZERO || state.fresh ? ALL_CLEAR : CLEAR
 
 const App = () => {
   const [state, dispatch] = useCalcReducer()
-
-  const {
-    handleButton,
-    handleNumber,
-    handleSymbol,
-  } = useHandlers(dispatch)
-
-  useKeyboard(dispatch);
+  const { button, number, symbol } = useHandlers(dispatch)
+  useKeyboard(dispatch)
 
   return (
     <div className="calc">
       <Display>{state.display}</Display>
       <Logo />
-      <Button value={clearDisplay(state)} onClick={handleButton} />
-      <Button value={MEMORY} onClick={handleButton} />
-      <Button value={MEMORY_CLEAR} onClick={handleButton} />
-      <Button value={MEMORY_RECALL} onClick={handleButton} />
-      <Button value="/" onClick={handleSymbol} />
-      <Button value={7} onClick={handleNumber} />
-      <Button value={8} onClick={handleNumber} />
-      <Button value={9} onClick={handleNumber} />
-      <Button value="X" onClick={handleSymbol} />
-      <Button value={4} onClick={handleNumber} />
-      <Button value={5} onClick={handleNumber} />
-      <Button value={6} onClick={handleNumber} />
-      <Button value="+" onClick={handleSymbol} />
-      <Button value={1} onClick={handleNumber} />
-      <Button value={2} onClick={handleNumber} />
-      <Button value={3} onClick={handleNumber} />
-      <Button value="-" onClick={handleSymbol} />
-      <Button value={PLUS_MINUS} onClick={handleButton} />
-      <Button value={0} onClick={handleNumber} />
-      <Button value={DECIMAL} onClick={handleButton} />
-      <Button value="=" onClick={handleSymbol} />
+      <Button value={clearDisplay(state)} onClick={button} />
+      <Button value={MEMORY} onClick={button} />
+      <Button value={MEMORY_CLEAR} onClick={button} />
+      <Button value={MEMORY_RECALL} onClick={button} />
+      <Button value="/" onClick={symbol} />
+      <Button value={7} onClick={number} />
+      <Button value={8} onClick={number} />
+      <Button value={9} onClick={number} />
+      <Button value="X" onClick={symbol} />
+      <Button value={4} onClick={number} />
+      <Button value={5} onClick={number} />
+      <Button value={6} onClick={number} />
+      <Button value="+" onClick={symbol} />
+      <Button value={1} onClick={number} />
+      <Button value={2} onClick={number} />
+      <Button value={3} onClick={number} />
+      <Button value="-" onClick={symbol} />
+      <Button value={PLUS_MINUS} onClick={button} />
+      <Button value={0} onClick={number} />
+      <Button value={DECIMAL} onClick={button} />
+      <Button value="=" onClick={symbol} />
     </div>
-  );
+  )
 }
 
 export default App
