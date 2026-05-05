@@ -25,11 +25,12 @@ const App = () => {
   const onClick = handleButtonClick(dispatch)
   const clearButton = clearDisplay(state)
   const buttons = [clearButton, ...BUTTONS]
+
   useKeyboard(onClick, clearButton)
 
   return (
     <div className="calc">
-      <Display buttons={buttons}>{state.display}</Display>
+      <Display for={buttons}>{state.display}</Display>
       <Logo />
       {
         buttons.map(

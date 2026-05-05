@@ -25,7 +25,7 @@ export function formatDisplayValue(value) {
   return formattedValue.replace("e", " e")
 }
 
-const Display = memo(({buttons, children}) => (
+const Display = memo(({for: buttons, children}) => (
   <output for={buttons.join(' ')}>
     {formatDisplayValue(children)}
   </output>

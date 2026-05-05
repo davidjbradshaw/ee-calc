@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './Button.css'
 
 const Button = ({value, onClick}) => (
-  <button type="button" value={value} onClick={() => onClick(value)}>
+  <button id={value} type="button" onClick={() => onClick(value)}>
     {value}
   </button>
 )
