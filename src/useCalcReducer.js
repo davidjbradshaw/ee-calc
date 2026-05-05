@@ -3,8 +3,8 @@ import { useReducer } from 'react'
 import {
   hasDecimal,
   canAppendDigit,
-  sum,
 } from './calcHelpers'
+import sum from './sum'
 
 import {
   ALL_CLEAR,

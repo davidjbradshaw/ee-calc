@@ -11,24 +11,3 @@ export const isScreenFull = (display) =>
 
 export const canAppendDigit = (display) =>
   !isScreenFull(`${display}${ZERO}`)
-
-export function sum({ register, display, lastSymbol }) {
-  const floatDisplay = Number(display)
-
-  switch (lastSymbol) {
-    case '/':
-      return register / floatDisplay
-
-    case 'X':
-      return register * floatDisplay
-
-    case '+':
-      return register + floatDisplay
-
-    case '-':
-      return register - floatDisplay
-
-    default:
-      return floatDisplay
-  }
-}
