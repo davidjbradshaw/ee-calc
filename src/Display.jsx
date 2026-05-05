@@ -7,11 +7,14 @@ import './Display.css'
 
 export function formatDisplayValue(value) {
   const rawValue = String(value)
-  const maxLength = hasDecimal(rawValue) ? SCREEN_MAX + 1 : SCREEN_MAX
 
-  if (!isScreenFull(rawValue)) {
-    return rawValue
-  }
+  if (rawValue === 'NaN') return 'Error'
+  if (!isScreenFull(rawValue)) return rawValue;
+
+  const maxLength = hasDecimal(rawValue)
+    ? SCREEN_MAX + 1
+    : SCREEN_MAX
+
 
   const numericValue = Number(rawValue)
 

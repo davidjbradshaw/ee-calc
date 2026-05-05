@@ -39,7 +39,7 @@ export const initialState = {
   memory: 0,
 }
 
-export function calcReducer(state = initialState, action) {
+export function calcReducer(state, action) {
   switch (action.type) {
     case ALL_CLEAR:
       return {
@@ -78,10 +78,7 @@ export function calcReducer(state = initialState, action) {
       }
 
     case SQRT: {
-      const value = Number(state.display)
-      if (value < 0) return state
-      const rooted = Math.sqrt(value)
-
+      const rooted = Math.sqrt(Number(state.display))
       return {
         ...state,
         display: String(rooted),
