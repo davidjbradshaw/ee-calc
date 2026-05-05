@@ -24,15 +24,15 @@ const App = () => {
   const [state, dispatch] = useCalcReducer()
   const onClick = handleButtonClick(dispatch)
   const clearButton = clearDisplay(state)
-
+  const buttons = [clearButton, ...BUTTONS]
   useKeyboard(onClick, clearButton)
 
   return (
     <div className="calc">
-      <Display>{state.display}</Display>
+      <Display buttons={buttons}>{state.display}</Display>
       <Logo />
       {
-        [clearButton, ...BUTTONS].map(
+        buttons.map(
           (button) => (
             <Button
               key={button}

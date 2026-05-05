@@ -25,8 +25,10 @@ export function formatDisplayValue(value) {
   return formattedValue.replace("e", " e")
 }
 
-const Display = memo(({children}) => (
-  <div className="display">{ formatDisplayValue(children) }</div>
+const Display = memo(({buttons, children}) => (
+  <output for={buttons}>
+    {formatDisplayValue(children)}
+  </output>
 ))
 
 Display.propTypes = {
