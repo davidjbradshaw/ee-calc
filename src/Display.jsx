@@ -26,7 +26,7 @@ export function formatDisplayValue(value) {
 }
 
 const Display = memo(({buttons, children}) => (
-  <output for={buttons}>
+  <output for={buttons.join(' ')}>
     {formatDisplayValue(children)}
   </output>
 ))
