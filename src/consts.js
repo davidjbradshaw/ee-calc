@@ -19,7 +19,6 @@ export const ADD = '+'
 export const SUBTRACT = '-'
 export const EQUALS = '='
 
-// Action Types
 export const ALL_CLEAR = 'AC'
 export const CLEAR = 'C'
 export const DECIMAL = '.'
@@ -28,7 +27,6 @@ export const MR = 'MR'
 export const SQRT = '√'
 export const PLUS_MINUS = '±'
 
-// Button layout
 export const BUTTONS = [
   MEMORY,      MR,     SQRT,     DIVIDE,
   SEVEN,       EIGHT,  NINE,     MULTIPLY,
