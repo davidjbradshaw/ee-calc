@@ -1,6 +1,15 @@
 import { useEffect } from 'react'
 
-import { CLEAR, NUMBER, SYMBOL, DECIMAL } from './consts'
+import {
+  ALL_CLEAR,
+  CLEAR,
+  DECIMAL,
+  DIVIDE,
+  MULTIPLY,
+  ADD,
+  SUBTRACT,
+  EQUALS,
+} from './consts'
 
 const isEditableElement = (target) =>
   target instanceof HTMLElement && (
@@ -10,45 +19,64 @@ const isEditableElement = (target) =>
     target.tagName === 'SELECT'
   )
 
-export default function useKeyboard(dispatch) {
+export default function useKeyboard(dispatch, clearAction = CLEAR) {
   useEffect(
     () => {
+      const dispatchButton = (button) =>
+        dispatch({ type: button, button })
+
       const handleKeyDown = (event) => {
         if (event.metaKey || event.ctrlKey || event.altKey) return
-        if (isEditableElement(event.target)) return;
+        if (isEditableElement(event.target)) return
 
         const { key } = event
 
         if (/^[0-9]$/.test(key)) {
-          dispatch({ type: NUMBER, number: Number(key) })
+          dispatch({
+            type: key,
+            button: key,
+            number: Number(key),
+          })
         } else switch (key) {
           case '.':
-            dispatch({ type: DECIMAL })
+            dispatchButton(DECIMAL)
             break
 
           case '+':
+            dispatchButton(ADD)
+            break
+
           case '-':
+            dispatchButton(SUBTRACT)
+            break
+
           case '/':
-            dispatch({ type: SYMBOL, symbol: key })
+            dispatchButton(DIVIDE)
             break
 
           case '*':
           case 'x':
           case 'X':
-            dispatch({ type: SYMBOL, symbol: 'X' })
+            dispatchButton(MULTIPLY)
             break
 
           case '=':
           case 'Enter':
-            dispatch({ type: SYMBOL, symbol: '=' })
+            dispatchButton(EQUALS)
             break
 
           case 'Backspace':
           case 'Delete':
+            dispatchButton(clearAction)
+            break
+
           case 'Escape':
+            dispatchButton(ALL_CLEAR)
+            break
+
           case 'c':
           case 'C':
-            dispatch({ type: CLEAR })
+            dispatchButton(clearAction)
             break
 
           default:
@@ -62,6 +90,6 @@ export default function useKeyboard(dispatch) {
 
       return () => window.removeEventListener('keydown', handleKeyDown)
     },
-    [dispatch],
+    [dispatch, clearAction],
   )
 }

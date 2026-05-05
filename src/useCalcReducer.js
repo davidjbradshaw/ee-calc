@@ -4,14 +4,26 @@ import { includes } from 'ramda'
 import {
   ALL_CLEAR,
   CLEAR,
-  NUMBER,
-  SYMBOL,
   DECIMAL,
   SCREEN_MAX,
   ZERO,
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  DIVIDE,
+  MULTIPLY,
+  ADD,
+  SUBTRACT,
+  EQUALS,
   MEMORY,
-  MEMORY_CLEAR,
-  MEMORY_RECALL,
+  MC,
+  MR,
   PLUS_MINUS,
 } from './consts'
 
@@ -84,28 +96,37 @@ export function calcReducer(state = initialState, action) {
         memory: Number(state.display),
       }
 
-    case MEMORY_CLEAR:
+    case MC:
       return {
         ...state,
         memory: 0,
       }
 
-    case MEMORY_RECALL:
+    case MR:
       return {
         ...state,
         display: String(state.memory),
         fresh: false,
       }
 
-    case NUMBER:
+    case ZERO:
+    case ONE:
+    case TWO:
+    case THREE:
+    case FOUR:
+    case FIVE:
+    case SIX:
+    case SEVEN:
+    case EIGHT:
+    case NINE:
       return {
         ...state,
         fresh: false,
         display:
           state.fresh || state.display === ZERO
-            ? String(action.number)
+            ? String(action.button)
             : canAppendDigit(state.display)
-              ? `${state.display}${action.number}`
+              ? `${state.display}${action.button}`
               : state.display,
       }
     
@@ -118,11 +139,15 @@ export function calcReducer(state = initialState, action) {
             : String(Number(state.display) * -1),
       }
 
-    case SYMBOL: {
+    case DIVIDE:
+    case MULTIPLY:
+    case ADD:
+    case SUBTRACT:
+    case EQUALS: {
       const summed = sum(state)
       return {
         ...state,
-        lastSymbol: action.symbol,
+        lastSymbol: action.button,
         fresh: true,
         register: summed,
         display: String(summed),

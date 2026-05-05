@@ -9,11 +9,8 @@ const Button = ({value, onClick}) => (
 )
 
 Button.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
-  onClick: PropTypes.func.isRequired
+  value: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default Button
