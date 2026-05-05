@@ -6,20 +6,18 @@ import { SCREEN_MAX } from './consts'
 import './Display.css'
 
 export function formatDisplayValue(value) {
-  const rawValue = String(value)
+  if (value === 'NaN') return 'Error'
+  if (!isScreenFull(value)) return value;
 
-  if (rawValue === 'NaN') return 'Error'
-  if (!isScreenFull(rawValue)) return rawValue;
-
-  const maxLength = hasDecimal(rawValue)
+  const maxLength = hasDecimal(value)
     ? SCREEN_MAX + 1
     : SCREEN_MAX
 
 
-  const numericValue = Number(rawValue)
+  const numericValue = Number(value)
 
   if (!Number.isFinite(numericValue)) {
-    return rawValue
+    return value
   }
 
   let precision = Math.max(0, maxLength - 4)
@@ -42,10 +40,7 @@ const Display = memo(({children}) => (
 ))
 
 Display.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
+  children: PropTypes.string.isRequired,
 }
 
 export default Display
