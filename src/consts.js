@@ -24,13 +24,13 @@ export const ALL_CLEAR = 'AC'
 export const CLEAR = 'C'
 export const DECIMAL = '.'
 export const MEMORY = 'M'
-export const MC = 'MC'
 export const MR = 'MR'
+export const SQRT = '√'
 export const PLUS_MINUS = '±'
 
 // Button layout
 export const BUTTONS = [
-  MEMORY,      MC,     MR,       DIVIDE,
+  MEMORY,      MR,     SQRT,     DIVIDE,
   SEVEN,       EIGHT,  NINE,     MULTIPLY,
   FOUR,        FIVE,   SIX,      ADD,
   ONE,         TWO,    THREE,    SUBTRACT,

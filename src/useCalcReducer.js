@@ -26,8 +26,8 @@ import {
   SUBTRACT,
   EQUALS,
   MEMORY,
-  MC,
   MR,
+  SQRT,
   PLUS_MINUS,
 } from './consts'
 
@@ -70,18 +70,25 @@ export function calcReducer(state = initialState, action) {
         memory: Number(state.display),
       }
 
-    case MC:
-      return {
-        ...state,
-        memory: 0,
-      }
-
     case MR:
       return {
         ...state,
         display: String(state.memory),
         fresh: false,
       }
+
+    case SQRT: {
+      const value = Number(state.display)
+      if (value < 0) return state
+      const rooted = Math.sqrt(value)
+
+      return {
+        ...state,
+        display: String(rooted),
+        register: rooted,
+        fresh: true,
+      }
+    }
 
     case ZERO:
     case ONE:
