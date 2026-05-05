@@ -22,7 +22,7 @@ export function formatDisplayValue(value) {
     formattedValue = numericValue.toExponential(precision)  
   }
 
-  return formattedValue.replace("e", " e")
+  return formattedValue
 }
 
 const Display = memo(({for: buttons, children}) => (
