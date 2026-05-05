@@ -1,11 +1,15 @@
 import { useReducer } from 'react'
-import { includes } from 'ramda'
+
+import {
+  hasDecimal,
+  canAppendDigit,
+  sum,
+} from './calcHelpers'
 
 import {
   ALL_CLEAR,
   CLEAR,
   DECIMAL,
-  SCREEN_MAX,
   ZERO,
   ONE,
   TWO,
@@ -26,36 +30,6 @@ import {
   MR,
   PLUS_MINUS,
 } from './consts'
-
-export const hasDecimal = includes('.')
-export const isScreenFull = (display) =>
-  display.length > (hasDecimal(display)
-    ? SCREEN_MAX + 1
-    : SCREEN_MAX
-  )
-
-const canAppendDigit = (display) =>
-  !isScreenFull(`${display}${ZERO}`)
-function sum({register, display, lastSymbol}) {
-  const floatDisplay = Number(display)
-
-  switch (lastSymbol) {
-    case '/':
-      return register / floatDisplay
-
-    case 'X':
-      return register * floatDisplay
-
-    case '+':
-      return register + floatDisplay
-
-    case '-':
-      return register - floatDisplay
-
-    default:
-      return floatDisplay
-  }
-}
 
 export const initialState = {
   display: ZERO,
