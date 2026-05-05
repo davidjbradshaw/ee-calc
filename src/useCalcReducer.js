@@ -80,17 +80,6 @@ export function calcReducer(state, action) {
         display: String(state.memory),
         fresh: false,
       }
-
-    case SQRT: {
-      const rooted = Math.sqrt(Number(state.display))
-      return {
-        ...state,
-        display: String(rooted),
-        register: rooted,
-        fresh: true,
-      }
-    }
-
     case ZERO:
     case ONE:
     case TWO:
@@ -100,25 +89,26 @@ export function calcReducer(state, action) {
     case SIX:
     case SEVEN:
     case EIGHT:
-    case NINE:
+    case NINE: {
+      const digit = action.button
+      const { display, fresh } = state
       return {
         ...state,
         fresh: false,
         display:
-          state.fresh || state.display === ZERO
-            ? String(action.button)
-            : canAppendDigit(state.display)
-              ? `${state.display}${action.button}`
-              : state.display,
+          fresh || display === ZERO
+            ? String(digit)
+            : canAppendDigit(display)
+              ? `${display}${digit}`
+              : display,
       }
-    
+    }
+
     case PLUS_MINUS:
       return {
         ...state,
         display:
-          state.display === ZERO
-            ? ZERO
-            : String(Number(state.display) * -1),
+          state.display === ZERO ? ZERO : String(Number(state.display) * -1),
       }
 
     case DIVIDE:
@@ -133,6 +123,16 @@ export function calcReducer(state, action) {
         fresh: true,
         register: summed,
         display: String(summed),
+      }
+    }
+
+    case SQRT: {
+      const rooted = Math.sqrt(Number(state.display))
+      return {
+        ...state,
+        display: String(rooted),
+        register: rooted,
+        fresh: true,
       }
     }
 
