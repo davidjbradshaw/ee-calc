@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Display from './Display'
-import Button from './Button'
+import Buttons from './Buttons'
 import Logo from './Logo'
 import {
   ALL_CLEAR,
@@ -24,25 +24,16 @@ const App = () => {
   const [state, dispatch] = useCalcReducer()
   const onClick = handleButtonClick(dispatch)
   const clearButton = clearDisplay(state)
+  const { display } = state
   const buttons = [clearButton, ...BUTTONS]
 
   useKeyboard(onClick, clearButton)
 
   return (
     <div className="calc">
-      <Display for={buttons}>{state.display}</Display>
+      <Display for={buttons}>{display}</Display>
       <Logo />
-      {
-        buttons.map(
-          (button) => (
-            <Button
-              key={button}
-              value={button}
-              onClick={onClick}
-            />
-          )
-        )
-      }
+      <Buttons onClick={onClick}>{buttons}</Buttons>
     </div>
   )
 }
