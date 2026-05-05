@@ -40,6 +40,10 @@ export const initialState = {
 }
 
 export function calcReducer(state, action) {
+  if (state.display === 'NaN' && action.type !== ALL_CLEAR) {
+    return state
+  }
+  
   switch (action.type) {
     case ALL_CLEAR:
       return {
