@@ -19,12 +19,9 @@ const isEditableElement = (target) =>
     target.tagName === 'SELECT'
   )
 
-export default function useKeyboard(dispatch, clearAction = CLEAR) {
+export default function useKeyboard(onClick, clearAction = CLEAR) {
   useEffect(
     () => {
-      const dispatchButton = (button) =>
-        dispatch({ type: button, button })
-
       const handleKeyDown = (event) => {
         if (event.metaKey || event.ctrlKey || event.altKey) return
         if (isEditableElement(event.target)) return
@@ -32,51 +29,47 @@ export default function useKeyboard(dispatch, clearAction = CLEAR) {
         const { key } = event
 
         if (/^[0-9]$/.test(key)) {
-          dispatch({
-            type: key,
-            button: key,
-            number: Number(key),
-          })
+          onClick(key)
         } else switch (key) {
           case '.':
-            dispatchButton(DECIMAL)
+            onClick(DECIMAL)
             break
 
           case '+':
-            dispatchButton(ADD)
+            onClick(ADD)
             break
 
           case '-':
-            dispatchButton(SUBTRACT)
+            onClick(SUBTRACT)
             break
 
           case '/':
-            dispatchButton(DIVIDE)
+            onClick(DIVIDE)
             break
 
           case '*':
           case 'x':
           case 'X':
-            dispatchButton(MULTIPLY)
+            onClick(MULTIPLY)
             break
 
           case '=':
           case 'Enter':
-            dispatchButton(EQUALS)
+            onClick(EQUALS)
             break
 
           case 'Backspace':
           case 'Delete':
-            dispatchButton(clearAction)
+            onClick(clearAction)
             break
 
           case 'Escape':
-            dispatchButton(ALL_CLEAR)
+            onClick(ALL_CLEAR)
             break
 
           case 'c':
           case 'C':
-            dispatchButton(clearAction)
+            onClick(clearAction)
             break
 
           default:
@@ -90,6 +83,6 @@ export default function useKeyboard(dispatch, clearAction = CLEAR) {
 
       return () => window.removeEventListener('keydown', handleKeyDown)
     },
-    [dispatch, clearAction],
+    [onClick, clearAction],
   )
 }

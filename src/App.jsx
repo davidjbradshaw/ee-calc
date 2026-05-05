@@ -22,10 +22,9 @@ const handleButtonClick = (dispatch) => (button) =>
 
 const App = () => {
   const [state, dispatch] = useCalcReducer()
-  const clearButton = clearDisplay(state)
-  useKeyboard(dispatch, clearButton)
-
   const clicked = handleButtonClick(dispatch)
+  const clearButton = clearDisplay(state)
+  useKeyboard(clicked, clearButton)
 
   return (
     <div className="calc">
